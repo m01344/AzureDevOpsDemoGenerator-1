@@ -46,13 +46,11 @@ jobs:
         with:
           name: ASP-app
     
-      - name: Log in with Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8744D79E2FDC4964A0F1F69BD0B3979C  }}
-
       - name: Deploy to Azure Web App
+        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'azuredevopsdemogen'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8744D79E2FDC4964A0F1F69BD0B3979C }}
           package: .
